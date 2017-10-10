@@ -2,7 +2,24 @@
 import { Spinner } from './System/spinner';
 import { RouteComponentProps } from 'react-router';
 
-export class Login extends React.Component<RouteComponentProps<{}>, {}> {
+interface LoginFormState {
+    isBusy: boolean;
+}
+
+export class Login extends React.Component<RouteComponentProps<{}>, LoginFormState> {
+    constructor() {
+        super();
+        this.state = { isBusy: false };
+    }
+
+    private login() {
+        let that = this;
+        this.setState({ isBusy: true });
+        setTimeout(function myfunction() {
+            that.setState({ isBusy: false });
+        }, 2000);
+    }
+
     public render() {
         return <div className="container">
             <br />
@@ -15,19 +32,13 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
                         <div className="panel-body">
                             <fieldset>
                                 <div className="form-group">
-                                    <input className="form-control" placeholder="E-mail" name="email" type="text" />
+                                    <input className="form-control" placeholder="Username" type="text" />
                                 </div>
                                 <div className="form-group">
-                                    <input className="form-control" placeholder="Password" name="password" type="password" value="" />
+                                    <input className="form-control" placeholder="Password" type="password" />
                                 </div>
-                                <div className="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me" /> Remember Me
-			    	                </label>
-                                </div>
-                                <button className="btn btn-success btn-block">
-                                    <Spinner width={20} height={20} />
-                                    Login
+                                <button className="btn btn-success btn-block" onClick={() => this.login()} disabled={this.state.isBusy}>
+                                    {this.state.isBusy ? <Spinner width={20} height={20} /> : 'Login'}
                                 </button>
                             </fieldset>
                         </div>
