@@ -11,6 +11,8 @@
     <None Remove="ClientApp\components\Login.tsx" />
     <None Remove="ClientApp\components\System\spinner.tsx" />
     <None Remove="ClientApp\configuration.tsx" />
+    <None Remove="ClientApp\Proxies\IdentityProxy.tsx" />
+    <None Remove="ClientApp\Proxies\ProxyModels.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,8 @@
     <TypeScriptCompile Include="ClientApp\components\Login.tsx" />
     <TypeScriptCompile Include="ClientApp\components\System\spinner.tsx" />
     <TypeScriptCompile Include="ClientApp\configuration.tsx" />
+    <TypeScriptCompile Include="ClientApp\Proxies\IdentityProxy.tsx" />
+    <TypeScriptCompile Include="ClientApp\Proxies\ProxyModels.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

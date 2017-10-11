@@ -6,12 +6,10 @@
 export class Configuration {
     public static serverConfig: ServerConfiguration;
 
-    public static loadConfigurations(onConfigLoaded: Function) {
-        fetch('api/configuration')
-            .then(response => response.json() as Promise<ServerConfiguration>)
-            .then(data => {
-                this.serverConfig = data;
-                onConfigLoaded();
-            });
+    public static async loadConfigurations(onConfigLoaded: Function) {
+        const response = await fetch("api/configuration");
+        const json = await response.json();
+        this.serverConfig = json as ServerConfiguration;
+        onConfigLoaded();
     }
 }
