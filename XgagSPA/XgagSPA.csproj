@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="ClientApp\components\Login.tsx" />
     <None Remove="ClientApp\components\System\spinner.tsx" />
+    <None Remove="ClientApp\configuration.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\Login.tsx" />
     <TypeScriptCompile Include="ClientApp\components\System\spinner.tsx" />
+    <TypeScriptCompile Include="ClientApp\configuration.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
