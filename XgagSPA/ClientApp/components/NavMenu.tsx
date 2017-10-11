@@ -1,7 +1,22 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import * as Models from '../Proxies/ProxyModels'
+import { RuntimeInfo } from '../RuntimeInfo'
 
-export class NavMenu extends React.Component<{}, {}> {
+interface NavMenuState {
+    user: Models.UserModel;
+}
+
+export class NavMenu extends React.Component<{}, NavMenuState> {
+    constructor() {
+        super();
+        this.state = {
+            user: RuntimeInfo.currentUser
+        }
+
+        RuntimeInfo.currentUserChanged.push(() => this.setState({ user: RuntimeInfo.currentUser }));
+    }
+
     public render() {
         return <div className='navbar navbar-default navbar-fixed-top'>
             <div className='container'>
@@ -29,6 +44,14 @@ export class NavMenu extends React.Component<{}, {}> {
                         <li>
                             <NavLink to={'/fetchdata'} activeClassName='active'>
                                 <span className='glyphicon glyphicon-th-list'></span> Fetch data
+                            </NavLink>
+                        </li>
+                    </ul>
+                    <ul className='nav navbar-nav navbar-right'>
+                        <li>
+                            <NavLink to={'/fetchdata'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span>
+                                {this.state.user == undefined ? "Username" : this.state.user.username}
                             </NavLink>
                         </li>
                     </ul>

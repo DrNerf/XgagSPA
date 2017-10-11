@@ -1,7 +1,16 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { RuntimeInfo } from '../RuntimeInfo'
 
 export class Home extends React.Component<RouteComponentProps<{}>, {}> {
+    constructor() {
+        super();
+        if (!RuntimeInfo.currentUser) {
+            //this.props.history.push('/login');
+            this.context.history.push('/new-location')
+        }
+    }
+
     public render() {
         return <div>
             <h1>Hello, world!</h1>

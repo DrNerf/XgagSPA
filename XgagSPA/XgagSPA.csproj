@@ -13,6 +13,7 @@
     <None Remove="ClientApp\configuration.tsx" />
     <None Remove="ClientApp\Proxies\IdentityProxy.tsx" />
     <None Remove="ClientApp\Proxies\ProxyModels.tsx" />
+    <None Remove="ClientApp\RuntimeInfo.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,7 @@
     <TypeScriptCompile Include="ClientApp\configuration.tsx" />
     <TypeScriptCompile Include="ClientApp\Proxies\IdentityProxy.tsx" />
     <TypeScriptCompile Include="ClientApp\Proxies\ProxyModels.tsx" />
+    <TypeScriptCompile Include="ClientApp\RuntimeInfo.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

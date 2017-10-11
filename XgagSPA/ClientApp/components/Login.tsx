@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { Configuration } from '../configuration';
 import { IdentityProxy } from '../Proxies/IdentityProxy'
 import * as Models from '../Proxies/ProxyModels'
+import { RuntimeInfo } from "../RuntimeInfo";
 
 interface LoginFormState {
     isBusy: boolean;
@@ -63,8 +64,12 @@ export class Login extends React.Component<RouteComponentProps<{}>, LoginFormSta
 
     private async login() {
         try {
+            this.setState({ isBusy: true });
             var user = await this.identityProxy.login(this.state.username, this.state.password);
-            console.log(user);
+            RuntimeInfo.setCurrentUser(user);
+            RuntimeInfo.writeSessionTokenToLocalStorage(user.apiSessionToken);
+            this.setState({ isBusy: false });
+            this.props.history.push('/');
         } catch (ex) {
             if (typeof (ex) == typeof (Models.ProxyException)) {
                 console.log(ex);
