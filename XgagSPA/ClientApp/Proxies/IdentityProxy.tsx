@@ -1,21 +1,14 @@
 ﻿import { Configuration } from '../configuration'
 import * as Models from './ProxyModels';
+import { ProxyBase } from './ProxyBase'
 
-export class IdentityProxy {
+export class IdentityProxy extends ProxyBase {
     public async login(username: string, password: string): Promise<Models.UserModel> {
-        const requestInit = {
-            method: 'POST',
-            body: JSON.stringify({
-                username: username,
-                password: password
-            }),
-            headers: new Headers({
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }),
-        } as RequestInit;
         const address = Configuration.serverConfig.identityServer.concat('/Auth');
-        const response = await fetch(address, requestInit);
+        const response = await fetch(address, this.getRequestInit('POST', {
+            username: username,
+            password: password
+        }));
         if (response.ok) {
             const json = await response.json();
             return json as Models.UserModel;
@@ -25,7 +18,15 @@ export class IdentityProxy {
         }
     }
 
-    //public async verifyToken(token: string): Promise<Models.UserModel> {
-
-    //}
+    public async verifyToken(token: string): Promise<Models.UserModel> {
+        const address = Configuration.serverConfig.identityServer.concat('/Auth');
+        const response = await fetch(address, this.getRequestInit('GET', null));
+        if (response.ok) {
+            const json = await response.json();
+            return json as Models.UserModel;
+        }
+        else {
+            throw new Models.ProxyException("Invalid token.");
+        }
+    }
 }

@@ -14,7 +14,11 @@ interface LoginFormState {
     showModal: boolean;
 }
 
-export class LoginModal extends React.Component<{}, LoginFormState> {
+interface LoginModalProps {
+    loggedIn: Function;
+}
+
+export class LoginModal extends React.Component<LoginModalProps, LoginFormState> {
     private identityProxy = new IdentityProxy();
 
     constructor() {
@@ -65,8 +69,8 @@ export class LoginModal extends React.Component<{}, LoginFormState> {
             this.setState({ isBusy: true });
             var user = await this.identityProxy.login(this.state.username, this.state.password);
             RuntimeInfo.setCurrentUser(user);
-            RuntimeInfo.writeSessionTokenToLocalStorage(user.apiSessionToken);
             this.setState({ isBusy: false, showModal: false });
+            this.props.loggedIn();
         } catch (ex) {
             if (typeof (ex) == typeof (Models.ProxyException)) {
                 console.log(ex);

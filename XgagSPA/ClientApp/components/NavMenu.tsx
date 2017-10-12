@@ -3,28 +3,20 @@ import { Link, NavLink } from 'react-router-dom';
 import * as Models from '../Proxies/ProxyModels'
 import { RuntimeInfo } from '../RuntimeInfo'
 
-interface NavMenuState {
-    user: Models.UserModel;
+interface NavMenuProps {
+    username: string;
+    profileImg: string;
 }
 
-export class NavMenu extends React.Component<{}, NavMenuState> {
+export class NavMenu extends React.Component<NavMenuProps, {}> {
     constructor() {
         super();
-        this.state = {
-            user: RuntimeInfo.currentUser
-        }
     }
 
     public render() {
         return <div className='navbar navbar-default navbar-fixed-top'>
             <div className='container'>
                 <div className='navbar-header'>
-                    <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-                        <span className='sr-only'>Toggle navigation</span>
-                        <span className='icon-bar'></span>
-                        <span className='icon-bar'></span>
-                        <span className='icon-bar'></span>
-                    </button>
                     <Link className='navbar-brand' to={'/'}>Xgag SPA</Link>
                 </div>
                 <div className='navbar-collapse collapse'>
@@ -46,10 +38,10 @@ export class NavMenu extends React.Component<{}, NavMenuState> {
                         </li>
                     </ul>
                     <ul className='nav navbar-nav navbar-right'>
-                        <li>
-                            <NavLink to={'/fetchdata'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span>
-                                {this.state.user == undefined ? "Username" : this.state.user.username}
+                        <li className='profile-li'>
+                            <NavLink to={'/fetchdata'} activeClassName='active' className='profile-link'>
+                                <img src={this.props.profileImg} className='img-rounded profile-mini-image' />
+                                {this.props.username}
                             </NavLink>
                         </li>
                     </ul>
