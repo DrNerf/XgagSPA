@@ -12,6 +12,7 @@
     <None Remove="ClientApp\components\System\spinner.tsx" />
     <None Remove="ClientApp\configuration.tsx" />
     <None Remove="ClientApp\Proxies\IdentityProxy.tsx" />
+    <None Remove="ClientApp\Proxies\PostsProxy.tsx" />
     <None Remove="ClientApp\Proxies\ProxyBase.tsx" />
     <None Remove="ClientApp\Proxies\ProxyModels.tsx" />
     <None Remove="ClientApp\RuntimeInfo.tsx" />
@@ -34,6 +35,7 @@
     <TypeScriptCompile Include="ClientApp\components\System\Spinner.tsx" />
     <TypeScriptCompile Include="ClientApp\configuration.tsx" />
     <TypeScriptCompile Include="ClientApp\Proxies\IdentityProxy.tsx" />
+    <TypeScriptCompile Include="ClientApp\Proxies\PostsProxy.tsx" />
     <TypeScriptCompile Include="ClientApp\Proxies\ProxyBase.tsx" />
     <TypeScriptCompile Include="ClientApp\Proxies\ProxyModels.tsx" />
     <TypeScriptCompile Include="ClientApp\RuntimeInfo.tsx" />

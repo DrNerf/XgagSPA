@@ -6,6 +6,17 @@
     apiSessionToken: string
 }
 
+export interface PostModel {
+    postId: number,
+    title: string,
+    dateCreatedTicks: number,
+    imageUrl: string,
+    youTubeLink: string,
+    isNsfw: boolean,
+    isYoutubePost: boolean,
+    score: number
+}
+
 export class ProxyException {
     public requestStatusCode: number;
     public errorMessage: string;
