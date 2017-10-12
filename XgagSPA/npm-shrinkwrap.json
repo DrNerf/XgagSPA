@@ -10,17 +10,22 @@
       "integrity": "sha1-CT1n7XgNiJyVQ/bcok6+4La5/EU=",
       "dev": true
     },
+    "@types/mousetrap": {
+      "version": "1.5.34",
+      "resolved": "https://registry.npmjs.org/@types/mousetrap/-/mousetrap-1.5.34.tgz",
+      "integrity": "sha512-a2yhRIADupQfOFM75v7GfcQQLUxU705+i/xcZ3N/3PK3Xdo31SUfuCUByWPGOHB1e38m7MxTx/D8FPVsJXZKJw=="
+    },
     "@types/react": {
-      "version": "15.0.35",
-      "resolved": "https://registry.npmjs.org/@types/react/-/react-15.0.35.tgz",
-      "integrity": "sha1-RnKSPNUC0D4UgNA4FuvFpxn7hto="
+      "version": "15.6.0",
+      "resolved": "https://registry.npmjs.org/@types/react/-/react-15.6.0.tgz",
+      "integrity": "sha512-cj0xPUuKS+5K9UWeHMeRUc32i7qrDZNKTrW92crNphx8hMy1gVmuJVune7E7NXpFVPn6O7VazXuXeDiCvNXDhg=="
     },
     "@types/react-bootstrap": {
       "version": "0.31.4",
       "resolved": "https://registry.npmjs.org/@types/react-bootstrap/-/react-bootstrap-0.31.4.tgz",
-      "integrity": "sha512-nQBHn3Rjlp46RokxeLiuknGm6s3dLT+PQ77qe6V4xe+89OJzq3WnncaNEhKz+Rjo8QVSshwnb5Ui18lDJqTmVQ==",
+      "integrity": "sha1-X/xKgJDWHq82Od8ciwiUKNuScP8=",
       "requires": {
-        "@types/react": "15.0.35"
+        "@types/react": "15.6.0"
       }
     },
     "@types/react-dom": {
@@ -29,7 +34,7 @@
       "integrity": "sha1-88PhTGgnhZI8fWRYNTffMZRC3sE=",
       "dev": true,
       "requires": {
-        "@types/react": "15.0.35"
+        "@types/react": "15.6.0"
       }
     },
     "@types/react-hot-loader": {
@@ -38,7 +43,7 @@
       "integrity": "sha1-7gKxmZwicTQY4ZjMPrCQt+ds5ZI=",
       "dev": true,
       "requires": {
-        "@types/react": "15.0.35"
+        "@types/react": "15.6.0"
       }
     },
     "@types/react-router": {
@@ -48,7 +53,7 @@
       "dev": true,
       "requires": {
         "@types/history": "4.6.0",
-        "@types/react": "15.0.35"
+        "@types/react": "15.6.0"
       }
     },
     "@types/react-router-dom": {
@@ -58,7 +63,7 @@
       "dev": true,
       "requires": {
         "@types/history": "4.6.0",
-        "@types/react": "15.0.35",
+        "@types/react": "15.6.0",
         "@types/react-router": "4.0.12"
       }
     },
@@ -2527,6 +2532,11 @@
         "minimist": "0.0.8"
       }
     },
+    "mousetrap": {
+      "version": "1.6.1",
+      "resolved": "https://registry.npmjs.org/mousetrap/-/mousetrap-1.6.1.tgz",
+      "integrity": "sha1-KghfXHUSlMdefoH27CVFspy/Qtk="
+    },
     "ms": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz",
@@ -3645,7 +3655,7 @@
     "react-bootstrap": {
       "version": "0.31.3",
       "resolved": "https://registry.npmjs.org/react-bootstrap/-/react-bootstrap-0.31.3.tgz",
-      "integrity": "sha512-n6OcS2IsxLcv1qmma14zKYBJqCsIS4ccwEtl09PLjbYTkKBLwkBmD7hB9+WQUgGfD21TP2UoEI87kIxjVwkP5Q==",
+      "integrity": "sha1-2yt9RbALXawauLbePdl/6zCRuEk=",
       "dev": true,
       "requires": {
         "babel-runtime": "6.23.0",

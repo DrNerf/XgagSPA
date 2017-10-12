@@ -6,6 +6,7 @@ import { IdentityProxy } from '../../Proxies/IdentityProxy'
 import * as Models from '../../Proxies/ProxyModels'
 import { RuntimeInfo } from "../../RuntimeInfo";
 import { Modal, FormGroup, FormControl, Collapse, Alert } from 'react-bootstrap'
+import 'mousetrap'
 
 interface LoginFormState {
     isBusy: boolean;
@@ -31,6 +32,13 @@ export class LoginModal extends React.Component<LoginModalProps, LoginFormState>
             showModal: true,
             wrongPassword: false
         };
+    }
+
+    componentDidMount() {
+        Mousetrap.bind('enter', (e) => this.login());
+    }
+    componentWillUnmount() {
+        Mousetrap.unbind('enter');
     }
 
     public render() {
