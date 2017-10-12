@@ -5,13 +5,14 @@ import { Configuration } from '../../configuration';
 import { IdentityProxy } from '../../Proxies/IdentityProxy'
 import * as Models from '../../Proxies/ProxyModels'
 import { RuntimeInfo } from "../../RuntimeInfo";
-import { Modal } from 'react-bootstrap'
+import { Modal, FormGroup, FormControl, Collapse, Alert } from 'react-bootstrap'
 
 interface LoginFormState {
     isBusy: boolean;
     username: string;
     password: string;
     showModal: boolean;
+    wrongPassword: boolean;
 }
 
 interface LoginModalProps {
@@ -27,7 +28,8 @@ export class LoginModal extends React.Component<LoginModalProps, LoginFormState>
             isBusy: false,
             username: '',
             password: '',
-            showModal: true
+            showModal: true,
+            wrongPassword: false
         };
     }
 
@@ -39,45 +41,65 @@ export class LoginModal extends React.Component<LoginModalProps, LoginFormState>
             <Modal.Body>
                 <fieldset>
                     <div className="form-group">
-                        <input className="form-control"
-                            placeholder="Username"
-                            type="text"
-                            value={this.state.username}
-                            onChange={(evt) => this.updateUsername(evt)}
-                            disabled={this.state.isBusy} />
+                        <FormGroup validationState={this.getUsernameValidationState()}>
+                            <input className="form-control"
+                                placeholder="Username"
+                                type="text"
+                                value={this.state.username}
+                                onChange={(evt) => this.updateUsername(evt)}
+                                disabled={this.state.isBusy} />
+                            <FormControl.Feedback />
+                        </FormGroup>
                     </div>
                     <div className="form-group">
-                        <input className="form-control"
-                            placeholder="Password"
-                            type="password"
-                            value={this.state.password}
-                            onChange={(evt) => this.updatePassword(evt)}
-                            disabled={this.state.isBusy} />
+                        <FormGroup validationState={this.getPwdValidationState()}>
+                            <input className="form-control"
+                                placeholder="Password"
+                                type="password"
+                                value={this.state.password}
+                                onChange={(evt) => this.updatePassword(evt)}
+                                disabled={this.state.isBusy} />
+                            <FormControl.Feedback />
+                        </FormGroup>
                     </div>
                     <button className="btn btn-success btn-block"
+                        type='submit'
                         onClick={() => this.login()}
                         disabled={this.state.isBusy}>
                         {this.state.isBusy ? <Spinner width={20} height={20} /> : 'Login'}
                     </button>
+                    <br/>
+                    <Collapse in={this.state.wrongPassword}>
+                        <div>
+                            <Alert bsStyle='danger'>Wrong username or password!</Alert>
+                        </div>
+                    </Collapse>
                 </fieldset>
             </Modal.Body>
         </Modal>;
     }
 
     private async login() {
+        this.setState({ isBusy: true });
         try {
-            this.setState({ isBusy: true });
             var user = await this.identityProxy.login(this.state.username, this.state.password);
             RuntimeInfo.setCurrentUser(user);
-            this.setState({ isBusy: false, showModal: false });
+            this.setState({ showModal: false });
             this.props.loggedIn();
         } catch (ex) {
-            if (typeof (ex) == typeof (Models.ProxyException)) {
-                console.log(ex);
-            }
-
             console.log(ex);
+            this.setState({ wrongPassword: true });
+        } finally {
+            this.setState({ isBusy: false });
         }
+    }
+
+    private getPwdValidationState(): "success" | "error" {
+        return this.state.password.length < 3 ? "error" : "success";
+    }
+
+    private getUsernameValidationState(): "success" | "error" {
+        return this.state.username.length < 3 ? "error" : "success";
     }
 
     private updateUsername(evt: React.ChangeEvent<HTMLInputElement>) {
