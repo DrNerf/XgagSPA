@@ -50,7 +50,7 @@ export class LoginModal extends React.Component<LoginModalProps, LoginFormState>
                 <fieldset>
                     <div className="form-group">
                         <FormGroup validationState={this.getUsernameValidationState()}>
-                            <input className="form-control"
+                            <input className="form-control mousetrap"
                                 placeholder="Username"
                                 type="text"
                                 value={this.state.username}
@@ -61,7 +61,7 @@ export class LoginModal extends React.Component<LoginModalProps, LoginFormState>
                     </div>
                     <div className="form-group">
                         <FormGroup validationState={this.getPwdValidationState()}>
-                            <input className="form-control"
+                            <input className="form-control mousetrap"
                                 placeholder="Password"
                                 type="password"
                                 value={this.state.password}

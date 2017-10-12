@@ -1,6 +1,7 @@
 import './css/site.css';
 import './css/bootstrap-darkly.css';
 import './css/System/spinner.css';
+import 'jquery';
 import 'bootstrap';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
