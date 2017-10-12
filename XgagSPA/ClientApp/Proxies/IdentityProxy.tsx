@@ -3,7 +3,6 @@ import * as Models from './ProxyModels';
 
 export class IdentityProxy {
     public async login(username: string, password: string): Promise<Models.UserModel> {
-        let reqHeaders = new Headers();;
         const requestInit = {
             method: 'POST',
             body: JSON.stringify({
@@ -25,4 +24,8 @@ export class IdentityProxy {
             throw new Models.ProxyException("Wrong username or password.");
         }
     }
+
+    //public async verifyToken(token: string): Promise<Models.UserModel> {
+
+    //}
 }

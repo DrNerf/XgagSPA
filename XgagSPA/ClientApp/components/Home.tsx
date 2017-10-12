@@ -5,10 +5,6 @@ import { RuntimeInfo } from '../RuntimeInfo'
 export class Home extends React.Component<RouteComponentProps<{}>, {}> {
     constructor() {
         super();
-        if (!RuntimeInfo.currentUser) {
-            //this.props.history.push('/login');
-            this.context.history.push('/new-location')
-        }
     }
 
     public render() {

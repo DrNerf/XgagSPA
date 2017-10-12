@@ -13,8 +13,6 @@ export class NavMenu extends React.Component<{}, NavMenuState> {
         this.state = {
             user: RuntimeInfo.currentUser
         }
-
-        RuntimeInfo.currentUserChanged.push(() => this.setState({ user: RuntimeInfo.currentUser }));
     }
 
     public render() {
