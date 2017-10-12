@@ -33,9 +33,13 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
         if (!RuntimeInfo.currentUser) {
             var token = RuntimeInfo.readSessionTokenFromLocalStorage();
             if (token) {
-                let user = await this.identityProxy.verifyToken(token);
-                RuntimeInfo.setCurrentUser(user);
-                isLoggedIn = true;
+                try {
+                    let user = await this.identityProxy.verifyToken(token);
+                    RuntimeInfo.setCurrentUser(user);
+                    isLoggedIn = true;
+                } catch (e) {
+                    console.warn(e);
+                }
             }
         }
 

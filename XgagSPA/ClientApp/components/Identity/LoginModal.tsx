@@ -95,7 +95,7 @@ export class LoginModal extends React.Component<LoginModalProps, LoginFormState>
             this.setState({ showModal: false });
             this.props.loggedIn();
         } catch (ex) {
-            console.log(ex);
+            console.warn(ex);
             this.setState({ wrongPassword: true });
         } finally {
             this.setState({ isBusy: false });
