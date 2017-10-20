@@ -6,7 +6,7 @@ import { ProgressBar } from 'react-bootstrap'
 import * as Models from '../Proxies/ProxyModels'
 import { Post } from './Posts/Post'
 import { Spinner } from './System/spinner'
-//import { Reac } from 'react-addons-css-transition-group'
+import * as CSSTransitionGroup from 'react-addons-css-transition-group'
 
 interface HomeState {
     posts: Models.PostModel[];
@@ -26,10 +26,12 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
         return <div className='container'>
             <br />
             <div className='col-lg-8'>
-                {this.state.posts.map(post =>
-                    <div className='row' key={post.postId}>
-                        <Post {...post} />
-                    </div>)}
+                <CSSTransitionGroup
+                    transitionName='list-item'
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1000}>
+                    {this.renderPosts()}
+                </CSSTransitionGroup>
                 <div className='row text-center'>
                     <Spinner width={50} height={50} />
                 </div>
@@ -48,6 +50,13 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
 
     public componentWillUnmount() {
         window.removeEventListener('scroll', () => this.handleOnScroll());
+    }
+
+    private renderPosts() {
+        return this.state.posts.map(post =>
+            <div className='row' key={post.postId}>
+                <Post {...post} />
+            </div>);
     }
 
     private handleOnScroll() {

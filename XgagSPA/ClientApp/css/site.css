@@ -18,3 +18,25 @@ body {
 .panel-body {
     padding: 0px !important;
 }
+
+.list-item-enter {
+    opacity: 0.01;
+    position:relative;
+    top: 15px;
+}
+
+    .list-item-enter.list-item-enter-active {
+        opacity: 1;
+        position: relative;
+        top: 0px;
+        transition: opacity 1000ms, top 300ms ease-in;
+    }
+
+.list-item-leave {
+    opacity: 1;
+}
+
+    .list-item-leave.list-item-leave-active {
+        opacity: 0.01;
+        transition: opacity 1000ms ease-in;
+    }
