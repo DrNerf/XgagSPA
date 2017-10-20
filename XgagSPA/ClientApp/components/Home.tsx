@@ -5,7 +5,7 @@ import { PostsProxy } from '../Proxies/PostsProxy'
 import { ProgressBar } from 'react-bootstrap'
 import * as Models from '../Proxies/ProxyModels'
 import { Post } from './Posts/Post'
-import { Spinner } from './System/spinner'
+import { Spinner } from './System/Spinner'
 import * as CSSTransitionGroup from 'react-addons-css-transition-group'
 
 interface HomeState {
@@ -14,6 +14,7 @@ interface HomeState {
 
 export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
     private postsProxy = new PostsProxy();
+    private page = 0;
 
     constructor() {
         super();
@@ -45,7 +46,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
     public componentDidMount() {
         window.addEventListener('scroll', () => this.handleOnScroll());
 
-        this.pushDemoPost();
+        this.loadNextPage();
     }
 
     public componentWillUnmount() {
@@ -66,23 +67,17 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
         var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
         if (scrolledToBottom) {
-            setTimeout(() => this.pushDemoPost(), 2000);
+            this.loadNextPage();
         }
     }
 
-    private demoIdCounter = 1;
-    private pushDemoPost(): void {
-        var newState = this.state.posts.concat([{
-            postId: this.demoIdCounter,
-            title: 'Demo',
-            dateCreatedTicks: 1231241234,
-            imageUrl: 'https://img-9gag-fun.9cache.com/photo/aB8Xq1N_700b.jpg',
-            youTubeLink: '',
-            isNsfw: false,
-            isYoutubePost: false,
-            score: 12
-        }]);
-        this.setState({ posts: newState })
-        this.demoIdCounter++;
+    private async loadNextPage(): Promise<void> {
+        try {
+            let newPosts = await this.postsProxy.getPosts(this.page + 1);
+            this.setState({ posts: this.state.posts.concat(newPosts) });
+            this.page++;
+        } catch (ex) {
+            console.error(ex);
+        }
     }
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavMenu } from './NavMenu';
 import { Configuration } from '../configuration'
-import { Spinner } from './System/spinner'
+import { Spinner } from './System/Spinner'
 import { Modal } from 'react-bootstrap'
 import { LoginModal } from './Identity/LoginModal'
 import { RuntimeInfo } from '../RuntimeInfo'

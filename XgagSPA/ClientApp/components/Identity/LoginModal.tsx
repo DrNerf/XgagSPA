@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { Spinner } from '../System/spinner';
+import { Spinner } from '../System/Spinner';
 import { RouteComponentProps } from 'react-router';
 import { Configuration } from '../../configuration';
 import { IdentityProxy } from '../../Proxies/IdentityProxy'

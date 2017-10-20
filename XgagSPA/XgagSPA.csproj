@@ -34,6 +34,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\Identity\LoginModal.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Posts\Post.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\System\Spacer.tsx" />
     <TypeScriptCompile Include="ClientApp\components\System\Spinner.tsx" />
     <TypeScriptCompile Include="ClientApp\configuration.tsx" />
     <TypeScriptCompile Include="ClientApp\Proxies\IdentityProxy.tsx" />
