@@ -8,3 +8,13 @@ body {
     width: 25px;
     height: 25px;
 }
+
+.post-image {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.panel-body {
+    padding: 0px !important;
+}
