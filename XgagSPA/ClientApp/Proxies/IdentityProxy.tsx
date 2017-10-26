@@ -18,7 +18,7 @@ export class IdentityProxy extends ProxyBase {
         }
     }
 
-    public async verifyToken(token: string): Promise<Models.UserModel> {
+    public async verifySession(): Promise<Models.UserModel> {
         const address = Configuration.serverConfig.identityServer.concat('/Auth');
         const response = await fetch(address, this.getRequestInit('GET', null));
         if (response.ok) {
@@ -26,7 +26,7 @@ export class IdentityProxy extends ProxyBase {
             return json as Models.UserModel;
         }
         else {
-            throw new Models.ProxyException("Invalid token.");
+            throw new Models.ProxyException("Invalid session.");
         }
     }
 }

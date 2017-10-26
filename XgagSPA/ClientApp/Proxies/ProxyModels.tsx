@@ -2,8 +2,7 @@
     id: string,
     email: string,
     username: string,
-    profilePictureUrl: string,
-    apiSessionToken: string
+    profilePictureUrl: string
 }
 
 export interface PostModel {
