@@ -10,8 +10,10 @@ interface PostState {
 }
 
 export class Post extends React.Component<Models.PostModel, PostState>{
-    constructor() {
-        super();
+    private image = new Image();
+
+    constructor(props: Models.PostModel) {
+        super(props);
         this.state = {
             isLoading: true
         };
@@ -19,17 +21,8 @@ export class Post extends React.Component<Models.PostModel, PostState>{
 
     public render() {
         return <Panel header={this.renderTitle()} footer={this.renderFooter()}>
-            <img
-                className='post-image'
-                src={!this.state.isLoading ? this.props.imageUrl : 'https://i.redd.it/ounq1mw5kdxy.gif'}
-                onLoad={this.setFileStatus.bind(this)} />
+            <img className='post-image' src={this.props.imageUrl} />
         </Panel>;
-    }
-
-    private setFileStatus(): void{
-        this.state = {
-            isLoading: false
-        };
     }
 
     private renderTitle() {
