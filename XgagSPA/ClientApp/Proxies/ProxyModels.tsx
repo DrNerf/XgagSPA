@@ -16,6 +16,16 @@ export interface PostModel {
     score: number
 }
 
+export interface ContributorModel {
+    user: UserModel,
+    postsCount: number
+}
+
+export interface PostsStatsModel {
+    topContributors: ContributorModel[],
+    topPosts: PostModel
+}
+
 export class ProxyException {
     public requestStatusCode: number;
     public errorMessage: string;

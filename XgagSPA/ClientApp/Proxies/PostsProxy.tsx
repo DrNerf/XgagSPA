@@ -15,4 +15,16 @@ export class PostsProxy extends ProxyBase {
             throw new Models.ProxyException('Could not retrieve posts.');
         }
     }
+
+    public async getStats(): Promise<Models.PostsStatsModel> {
+        const address = Configuration.serverConfig.postsServer
+            .concat('/stats');
+        const response = await fetch(address, this.getRequestInit('GET', null));
+        if (response.ok) {
+            const json = await response.json();
+            return json as Models.PostsStatsModel;
+        } else {
+            throw new Models.ProxyException('Could not retrieve posts stats.');
+        }
+    }
 }

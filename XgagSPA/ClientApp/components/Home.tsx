@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { RuntimeInfo } from '../RuntimeInfo'
 import { PostsProxy } from '../Proxies/PostsProxy'
-import { ProgressBar } from 'react-bootstrap'
+import { ProgressBar, Panel } from 'react-bootstrap'
 import * as Models from '../Proxies/ProxyModels'
 import { Post } from './Posts/Post'
 import { Spinner } from './System/Spinner'
@@ -10,6 +10,7 @@ import * as CSSTransitionGroup from 'react-addons-css-transition-group'
 
 interface HomeState {
     posts: Models.PostModel[];
+    stats: Models.PostsStatsModel | null;
 }
 
 export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
@@ -19,7 +20,8 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
     constructor() {
         super();
         this.state = {
-            posts: []
+            posts: [],
+            stats: null
         };
     }
 
@@ -39,6 +41,12 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
                 <br />
             </div>
             <div className='col-lg-4'>
+                <CSSTransitionGroup
+                    transitionName='list-item'
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1000}>
+                    {this.state.stats != null ? this.renderStats() : ''}
+                </CSSTransitionGroup>
             </div>
         </div>;
     }
@@ -47,10 +55,27 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
         window.addEventListener('scroll', () => this.handleOnScroll());
 
         this.loadNextPage();
+        this.postsProxy.getStats().then(
+            (stats) =>
+            {
+                console.log(stats);
+                this.setState({ stats: stats });
+            });
     }
 
     public componentWillUnmount() {
         window.removeEventListener('scroll', () => this.handleOnScroll());
+    }
+
+    private renderStats() {
+        return [<Panel key="TC" header='Top Contributors:'>
+            <ul className="list-group">
+                {this.state.stats.topContributors.map(contributor =>
+                    <li className="list-group-item">{contributor.user}</li>)}
+            </ul>
+        </Panel>,
+            <Panel key="TP" header="Top Posts:">
+        </Panel>]
     }
 
     private renderPosts() {
