@@ -13,7 +13,9 @@ export interface PostModel {
     youTubeLink: string,
     isNsfw: boolean,
     isYoutubePost: boolean,
-    score: number
+    score: number,
+    commentsCount: number,
+    hasNewComments: boolean
 }
 
 export interface ContributorModel {
@@ -23,7 +25,7 @@ export interface ContributorModel {
 
 export interface PostsStatsModel {
     topContributors: ContributorModel[],
-    topPosts: PostModel
+    topPosts: PostModel[]
 }
 
 export class ProxyException {

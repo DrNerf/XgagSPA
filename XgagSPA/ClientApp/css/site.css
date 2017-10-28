@@ -21,7 +21,7 @@ body {
 
 .list-item-enter {
     opacity: 0.01;
-    position:relative;
+    position: relative;
     top: 15px;
 }
 
@@ -40,3 +40,21 @@ body {
         opacity: 0.01;
         transition: opacity 1000ms ease-in;
     }
+
+.post-preview {
+    height: 100px;
+    overflow: hidden;
+    border: 1px solid #df691a;
+}
+
+    .post-preview img {
+        width: 100%;
+    }
+
+.no-border {
+    border: 0px !important;
+}
+
+.no-margin {
+    margin: 0px !important;
+}

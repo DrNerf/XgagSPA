@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\Home.tsx~RF2c02ff80.TMP" />
     <None Remove="ClientApp\components\Identity\LoginModel.tsx" />
     <None Remove="ClientApp\components\Posts\Post.tsx" />
     <None Remove="ClientApp\components\System\spinner.tsx" />

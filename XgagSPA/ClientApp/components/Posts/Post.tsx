@@ -31,16 +31,21 @@ export class Post extends React.Component<Models.PostModel, PostState>{
 
     private renderFooter() {
         return <div>
-            <button className='btn btn-primary'><Glyphicon glyph={'arrow-up'} /></button>
-            <Spacer type='horizontal' space={5} />
-            <button className='btn btn-primary'><Glyphicon glyph={'arrow-down'} /></button>
-            <Spacer type='horizontal' space={5} />
-            <button className='btn btn-primary'>
-                <Glyphicon glyph='comment' /> 5
-            </button>
-            <span className='pull-right text-info'>
-                Posted at: {this.getPostedDate().toLocaleDateString()}
-            </span>
+            <div>
+                <span className="text-info text">Score: {this.props.score}</span>
+                <span className='pull-right text-info'>
+                    Posted at: {this.getPostedDate().toLocaleDateString()}
+                </span>
+            </div>
+            <div>
+                <button className='btn btn-primary'><Glyphicon glyph={'arrow-up'} /></button>
+                <Spacer type='horizontal' space={5} />
+                <button className='btn btn-primary'><Glyphicon glyph={'arrow-down'} /></button>
+                <Spacer type='horizontal' space={5} />
+                <button className='btn btn-primary'>
+                    <Glyphicon glyph='comment' /> {this.props.commentsCount}
+                </button>
+            </div>
         </div>;
     }
 

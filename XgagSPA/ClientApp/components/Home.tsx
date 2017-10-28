@@ -7,10 +7,12 @@ import * as Models from '../Proxies/ProxyModels'
 import { Post } from './Posts/Post'
 import { Spinner } from './System/Spinner'
 import * as CSSTransitionGroup from 'react-addons-css-transition-group'
+import { Link } from 'react-router-dom'
+import { Spacer } from './System/Spacer'
 
 interface HomeState {
     posts: Models.PostModel[];
-    stats: Models.PostsStatsModel | null;
+    stats?: Models.PostsStatsModel;
 }
 
 export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
@@ -21,7 +23,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
         super();
         this.state = {
             posts: [],
-            stats: null
+            stats: undefined
         };
     }
 
@@ -45,7 +47,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
                     transitionName='list-item'
                     transitionEnterTimeout={1000}
                     transitionLeaveTimeout={1000}>
-                    {this.state.stats != null ? this.renderStats() : ''}
+                    {this.state.stats != undefined ? this.renderStats() : ''}
                 </CSSTransitionGroup>
             </div>
         </div>;
@@ -58,7 +60,6 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
         this.postsProxy.getStats().then(
             (stats) =>
             {
-                console.log(stats);
                 this.setState({ stats: stats });
             });
     }
@@ -68,13 +69,33 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
     }
 
     private renderStats() {
+        if (!this.state.stats) {
+            return;
+        }
+
+        let postKey = 0, contributorKey = 0;
         return [<Panel key="TC" header='Top Contributors:'>
             <ul className="list-group">
                 {this.state.stats.topContributors.map(contributor =>
-                    <li className="list-group-item">{contributor.user}</li>)}
+                    <li className="list-group-item no-border" key={++contributorKey}>
+                        <img className="img-rounded" width="30" src={contributor.user.profilePictureUrl} />
+                        <Spacer type="horizontal" space={5} />
+                        {contributor.user.username} with {contributor.postsCount} posts!
+                    </li>)}
             </ul>
         </Panel>,
             <Panel key="TP" header="Top Posts:">
+                <ul className="list-group">
+                    {this.state.stats.topPosts.map(post =>
+                        <li className="list-group-item no-border" key={++postKey}>
+                            <Link to="">{post.title} with {post.score} points!</Link>
+                            <div className="post-preview">
+                                <Link to="">
+                                    <img src={post.imageUrl} />
+                                </Link>
+                            </div>
+                        </li>)}
+                </ul>
         </Panel>]
     }
 
