@@ -22,7 +22,9 @@ export class Post extends React.Component<Models.PostModel, PostState>{
 
     public render() {
         return <Panel header={this.renderTitle()} footer={this.renderFooter()}>
-            <AsyncImage className='post-image' src={this.props.imageUrl} />
+            {this.props.isYoutubePost ?
+                <div dangerouslySetInnerHTML={{ __html: this.props.youTubeLink }}></div> :
+                <AsyncImage className='post-image' src={this.props.imageUrl} />}
         </Panel>;
     }
 
