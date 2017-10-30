@@ -4,6 +4,7 @@ import * as Models from '../../Proxies/ProxyModels'
 import { Spacer } from '../System/Spacer'
 import { Link } from 'react-router-dom'
 import { Spinner } from '../System/Spinner'
+import { AsyncImage } from '../System/AsyncImage'
 
 interface PostState {
     isLoading: boolean;
@@ -21,7 +22,7 @@ export class Post extends React.Component<Models.PostModel, PostState>{
 
     public render() {
         return <Panel header={this.renderTitle()} footer={this.renderFooter()}>
-            <img className='post-image' src={this.props.imageUrl} />
+            <AsyncImage className='post-image' src={this.props.imageUrl} />
         </Panel>;
     }
 

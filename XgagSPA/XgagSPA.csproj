@@ -11,6 +11,7 @@
     <None Remove="ClientApp\components\Home.tsx~RF2c02ff80.TMP" />
     <None Remove="ClientApp\components\Identity\LoginModel.tsx" />
     <None Remove="ClientApp\components\Posts\Post.tsx" />
+    <None Remove="ClientApp\components\System\AsyncImage.tsx" />
     <None Remove="ClientApp\components\System\spinner.tsx" />
     <None Remove="ClientApp\configuration.tsx" />
     <None Remove="ClientApp\Proxies\IdentityProxy.tsx" />
@@ -35,6 +36,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\Identity\LoginModal.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Posts\Post.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\System\AsyncImage.tsx" />
     <TypeScriptCompile Include="ClientApp\components\System\Spacer.tsx" />
     <TypeScriptCompile Include="ClientApp\components\System\Spinner.tsx" />
     <TypeScriptCompile Include="ClientApp\configuration.tsx" />
