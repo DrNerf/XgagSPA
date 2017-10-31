@@ -13,7 +13,7 @@ export class Spinner extends React.Component<SpinnerProps> {
 
     public render() {
         return <div className="wrapper">
-            <div className="cssload-loader" style={this.spinnerStyles}></div>
+            <div className="cssload-loader absolute-center" style={this.spinnerStyles}></div>
         </div>;
     }
 }

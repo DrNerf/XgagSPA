@@ -1,10 +1,11 @@
 ﻿import * as React from 'react'
 import { Spinner } from '../System/Spinner'
 import { Spacer } from './Spacer'
+import { Fade } from 'react-bootstrap'
 
 interface AsyncImageProps {
     src: string;
-    className: string;
+    className?: string;
 }
 
 interface AsyncImageState {
@@ -27,11 +28,13 @@ export class AsyncImage extends React.Component<AsyncImageProps, AsyncImageState
 
     public render() {
         return <div>
-            {this.state.isLoaded ?
-                <img className={this.props.className} src={this.props.src} /> :
-                <div className="text-center spinner-container">
+            <Fade in={this.state.isLoaded}>
+                <img className={this.props.className} src={this.props.src} />
+            </Fade>
+            {!this.state.isLoaded ?
+                <div className="text-center">
                     <Spinner width={50} height={50} />
-                </div>}
+                </div> : ''}
         </div>
     }
 }

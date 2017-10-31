@@ -9,6 +9,7 @@ import { Spinner } from './System/Spinner'
 import * as CSSTransitionGroup from 'react-addons-css-transition-group'
 import { Link } from 'react-router-dom'
 import { Spacer } from './System/Spacer'
+import { AsyncImage } from './System/AsyncImage'
 
 interface HomeState {
     posts: Models.PostModel[];
@@ -91,7 +92,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
                             <Link to="">{post.title} with {post.score} points!</Link>
                             <div className="post-preview">
                                 <Link to="">
-                                    <img src={post.imageUrl} />
+                                    <AsyncImage src={post.imageUrl} />
                                 </Link>
                             </div>
                         </li>)}
