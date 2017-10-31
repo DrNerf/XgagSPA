@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavMenu } from './NavMenu';
 import { Configuration } from '../configuration'
 import { Spinner } from './System/Spinner'
-import { Modal } from 'react-bootstrap'
+import { Modal, ProgressBar, Collapse, Fade } from 'react-bootstrap'
 import { LoginModal } from './Identity/LoginModal'
 import { RuntimeInfo } from '../RuntimeInfo'
 import { IdentityProxy } from '../Proxies/IdentityProxy'
@@ -14,6 +14,7 @@ export interface LayoutProps {
 interface LayoutState {
     isBusy: boolean;
     isLoggedIn: boolean;
+    pageProgress: number;
 }
 
 export class Layout extends React.Component<LayoutProps, LayoutState> {
@@ -23,7 +24,8 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
         super();
         this.state = {
             isBusy: true,
-            isLoggedIn: false
+            isLoggedIn: false,
+            pageProgress: 0
         };
         Configuration.loadConfigurations(() => { this.onConfigLoaded(); });
     }
@@ -47,8 +49,26 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
         this.setState({ isLoggedIn: true });
     }
 
+    public componentWillReceiveProps(nextProps: any) {
+        this.setState({ pageProgress: 0 });
+        let updateProgressInterval = setInterval(
+            () => {
+                if (this.state.pageProgress >= 100) {
+                    clearInterval(updateProgressInterval);
+                    return;
+                }
+
+                this.setState({ pageProgress: this.state.pageProgress + 10 });
+                console.log(this.state.pageProgress);
+            },
+            1000);
+    }
+
     public render() {
         return <div>
+            <Fade in={this.state.pageProgress != 100}>
+                <ProgressBar id='page-progressbar' active now={this.state.pageProgress} />
+            </Fade>
             {RuntimeInfo.currentUser ?
                 <NavMenu username={RuntimeInfo.currentUser.username}
                     profileImg={RuntimeInfo.currentUser.profilePictureUrl} />

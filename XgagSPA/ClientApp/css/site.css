@@ -74,3 +74,10 @@ body {
 .post-image-container {
     min-height: 100px;
 }
+
+#page-progressbar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
