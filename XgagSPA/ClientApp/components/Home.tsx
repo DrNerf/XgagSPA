@@ -57,7 +57,8 @@ export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
     public componentDidMount() {
         window.addEventListener('scroll', () => this.handleOnScroll());
 
-        this.loadNextPage();
+        this.loadNextPage().then(
+            () => RuntimeInfo.triggerPageLoadCompleted());
         this.postsProxy.getStats().then(
             (stats) =>
             {

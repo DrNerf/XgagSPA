@@ -22,6 +22,9 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 
     constructor() {
         super();
+        RuntimeInfo.pageLoadCompleted = () => {
+            this.setState({ pageProgress: 100 });
+        };
         this.state = {
             isBusy: true,
             isLoggedIn: false,
@@ -50,18 +53,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
     }
 
     public componentWillReceiveProps(nextProps: any) {
-        this.setState({ pageProgress: 0 });
-        let updateProgressInterval = setInterval(
-            () => {
-                if (this.state.pageProgress >= 100) {
-                    clearInterval(updateProgressInterval);
-                    return;
-                }
-
-                this.setState({ pageProgress: this.state.pageProgress + 10 });
-                console.log(this.state.pageProgress);
-            },
-            1000);
+        this.startPageLoading();
     }
 
     public render() {
@@ -78,5 +70,19 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
                 {this.state.isLoggedIn ? this.props.children : <LoginModal loggedIn={() => this.onLoggedIn()} />}
             </div>
         </div>;
+    }
+
+    private startPageLoading(): void {
+        this.setState({ pageProgress: 0 });
+        let updateProgressInterval = setInterval(
+            () => {
+                if (this.state.pageProgress >= 100) {
+                    clearInterval(updateProgressInterval);
+                    return;
+                }
+
+                this.setState({ pageProgress: this.state.pageProgress + 10 });
+            },
+            500);
     }
 }

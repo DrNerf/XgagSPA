@@ -13,6 +13,7 @@ interface AsyncImageState {
 }
 
 export class AsyncImage extends React.Component<AsyncImageProps, AsyncImageState> {
+    private _isMounted = false;
     constructor() {
         super();
         this.state = {
@@ -21,9 +22,18 @@ export class AsyncImage extends React.Component<AsyncImageProps, AsyncImageState
     }
 
     public componentDidMount() {
+        this._isMounted = true;
         let preloadedImage = new Image();
-        preloadedImage.onload = () => this.setState({ isLoaded: true });
+        preloadedImage.onload = () => {
+            if (this._isMounted) {
+                this.setState({ isLoaded: true });
+            }
+        };
         preloadedImage.src = this.props.src;
+    }
+
+    public componentWillUnmount() {
+        this._isMounted = false;
     }
 
     public render() {
